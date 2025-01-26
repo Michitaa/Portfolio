@@ -1,12 +1,924 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi página en GitHub Pages</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artistic Portfolio</title>
+  <!-- Cargar fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Gorditas:wght@400;700&display=swap" rel="stylesheet">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+
+</body>
+<script type="text/javascript">
+// <![CDATA[
+var colour="random"; // in addition to "random" can be set to any valid colour eg "#f0f" or "red"
+var sparkles=50;
+
+/****************************
+*  Tinkerbell Magic Sparkle *
+*(c)2005-13 mf2fm web-design*
+*  http://www.mf2fm.com/rv  *
+* DON'T EDIT BELOW THIS BOX *
+****************************/
+var x=ox=400;
+var y=oy=300;
+var swide=800;
+var shigh=600;
+var sleft=sdown=0;
+var tiny=new Array();
+var star=new Array();
+var starv=new Array();
+var starx=new Array();
+var stary=new Array();
+var tinyx=new Array();
+var tinyy=new Array();
+var tinyv=new Array();
+
+window.onload=function() { if (document.getElementById) {
+  var i, rats, rlef, rdow;
+  for (var i=0; i<sparkles; i++) {
+    var rats=createDiv(3, 3);
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    document.body.appendChild(tiny[i]=rats);
+    starv[i]=0;
+    tinyv[i]=0;
+    var rats=createDiv(5, 5);
+    rats.style.backgroundColor="transparent";
+    rats.style.visibility="hidden";
+    rats.style.zIndex="999";
+    var rlef=createDiv(1, 5);
+    var rdow=createDiv(5, 1);
+    rats.appendChild(rlef);
+    rats.appendChild(rdow);
+    rlef.style.top="2px";
+    rlef.style.left="0px";
+    rdow.style.top="0px";
+    rdow.style.left="2px";
+    document.body.appendChild(star[i]=rats);
+  }
+  set_width();
+  sparkle();
+}}
+
+function sparkle() {
+  var c;
+  if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
+    ox=x;
+    oy=y;
+    for (c=0; c<sparkles; c++) if (!starv[c]) {
+      star[c].style.left=(starx[c]=x)+"px";
+      star[c].style.top=(stary[c]=y+1)+"px";
+      star[c].style.clip="rect(0px, 5px, 5px, 0px)";
+      star[c].childNodes[0].style.backgroundColor=star[c].childNodes[1].style.backgroundColor=(colour=="random")?newColour():colour;
+      star[c].style.visibility="visible";
+      starv[c]=50;
+      break;
+    }
+  }
+  for (c=0; c<sparkles; c++) {
+    if (starv[c]) update_star(c);
+    if (tinyv[c]) update_tiny(c);
+  }
+  setTimeout("sparkle()", 40);
+}
+
+function update_star(i) {
+if ((starv[i]-=2)<=25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
+
+  if (starv[i]) {
+    stary[i]+=1+Math.random()*3;
+    starx[i]+=(i%5-2)/5;
+    if (stary[i]<shigh+sdown) {
+      star[i].style.top=stary[i]+"px";
+      star[i].style.left=starx[i]+"px";
+    }
+    else {
+      star[i].style.visibility="hidden";
+      starv[i]=0;
+      return;
+    }
+  }
+  else {
+    tinyv[i]=50;
+    tiny[i].style.top=(tinyy[i]=stary[i])+"px";
+    tiny[i].style.left=(tinyx[i]=starx[i])+"px";
+    tiny[i].style.width="2px";
+    tiny[i].style.height="2px";
+    tiny[i].style.backgroundColor=star[i].childNodes[0].style.backgroundColor;
+    star[i].style.visibility="hidden";
+    tiny[i].style.visibility="visible"
+  }
+}
+
+function update_tiny(i) {
+if ((tinyv[i]-=2)<=25) {
+
+    tiny[i].style.width="1px";
+    tiny[i].style.height="1px";
+  }
+  if (tinyv[i]) {
+    tinyy[i]+=1+Math.random()*3;
+    tinyx[i]+=(i%5-2)/5;
+    if (tinyy[i]<shigh+sdown) {
+      tiny[i].style.top=tinyy[i]+"px";
+      tiny[i].style.left=tinyx[i]+"px";
+    }
+    else {
+      tiny[i].style.visibility="hidden";
+      tinyv[i]=0;
+      return;
+    }
+  }
+  else tiny[i].style.visibility="hidden";
+}
+
+document.onmousemove=mouse;
+function mouse(e) {
+  if (e) {
+    y=e.pageY;
+    x=e.pageX;
+  }
+  else {
+    set_scroll();
+    y=event.y+sdown;
+    x=event.x+sleft;
+  }
+}
+
+window.onscroll=set_scroll;
+function set_scroll() {
+  if (typeof(self.pageYOffset)=='number') {
+    sdown=self.pageYOffset;
+    sleft=self.pageXOffset;
+  }
+  else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) {
+    sdown=document.body.scrollTop;
+    sleft=document.body.scrollLeft;
+  }
+  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+    sleft=document.documentElement.scrollLeft;
+    sdown=document.documentElement.scrollTop;
+  }
+  else {
+    sdown=0;
+    sleft=0;
+  }
+}
+
+window.onresize=set_width;
+function set_width() {
+  var sw_min=999999;
+  var sh_min=999999;
+  if (document.documentElement && document.documentElement.clientWidth) {
+    if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
+    if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
+  }
+  if (typeof(self.innerWidth)=='number' && self.innerWidth) {
+    if (self.innerWidth>0 && self.innerWidth<sw_min) sw_min=self.innerWidth;
+    if (self.innerHeight>0 && self.innerHeight<sh_min) sh_min=self.innerHeight;
+  }
+  if (document.body.clientWidth) {
+    if (document.body.clientWidth>0 && document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
+    if (document.body.clientHeight>0 && document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
+  }
+  if (sw_min==999999 || sh_min==999999) {
+    sw_min=800;
+    sh_min=600;
+  }
+  swide=sw_min;
+  shigh=sh_min;
+}
+
+function createDiv(height, width) {
+  var div=document.createElement("div");
+  div.style.position="absolute";
+  div.style.height=height+"px";
+  div.style.width=width+"px";
+  div.style.overflow="hidden";
+  return (div);
+}
+
+function newColour() {
+  var c=new Array();
+  c[0]=255;
+  c[1]=Math.floor(Math.random()*256);
+  c[2]=Math.floor(Math.random()*(256-c[1]/2));
+  c.sort(function(){return (0.5 - Math.random());});
+  return ("rgb("+c[0]+", "+c[1]+", "+c[2]+")");
+}
+// ]]>
+</script>
+  <style>
+        /* Estilo del scrollbar para Chrome, Edge y Safari */
+        *::-webkit-scrollbar {
+            width: 16px;
+        }
+
+        *::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background-color: #e7667b;
+            border-radius: 10px;
+            border: 3px solid #c54459;
+        }
+
+  
+  
+  /* Estilo del cursor por defecto */
+    body {
+      cursor: url('https://64.media.tumblr.com/78cb5bd5bc8be3f34c910e716539aa4d/41dadce1542a2821-d4/s75x75_c1/5b791dcedcb5a0ab2c6eff2c884d7bbddcc3f28e.pnj'), auto;
+    }
+
+    /* Cada carpeta */
+    .folder {
+      text-align: center;
+    }
+
+    /* Cambia el cursor al pasar sobre una carpeta */
+    .folder:hover {
+      cursor: url('https://64.media.tumblr.com/687da508e31ecbfd1e35a479db782c91/41dadce1542a2821-21/s75x75_c1/55b2f3473eb9210c5e78fced46055cdf112d422c.pnj'), auto; /* Cambia al cursor deseado */
+    }
+    /* Fondo */
+   body {
+    font-family: 'Press Start 2P', cursive;
+    background: url('https://images7.alphacoders.com/133/1339214.png') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Establece la altura igual a la altura de la ventana */
+    overflow: hidden; /* Elimina el scroll si no es necesario */
+}
+
+
+    /* Contenedor principal */
+    .container {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    /* Contenedor de carpetas */
+    .folders {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    /* Cada carpeta */
+    .folder {
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .folder img {
+       image-rendering: pixelated; /* Resalta los píxeles (estilo retro) */
+  width: 180px; /* Tamaño deseado */
+  height: auto; /* Mantiene la proporción */
+      transition: transform 0.3s;
+    }
+
+    .folder img:hover {
+      transform: scale(1.2);
+    }
+
+    .folder span {
+      font-family: 'Gorditas', Serif; /* Usa Gorditas aquí */
+      font-size: 16px; /* Ajusta el tamaño según prefieras */
+      color: #562410; /* Cambia el color si lo necesitas */
+      text-shadow: none; /* Sin sombreado */
+      display: block; /* Asegura que el texto quede en una nueva línea debajo de la imagen */
+      margin-top: 8px; /* Añade un pequeño espacio entre la imagen y el texto */
+      letter-spacing: 0px; /* Reduce la separación entre letras */
+    }
+
+    /* Contenido de las carpetas */
+   .content {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 0px;
+  border-radius: 10px;
+  text-align: center;
+  width: 80%; /* Ajusta el ancho */
+  max-width: 1200px; /* Máximo ancho */
+  max-height: 80%; /* Altura máxima */
+  overflow-y: auto; /* Habilita scroll vertical */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+   /* Botón Cerrar */
+        #closeButton {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            display: none;
+        }
+
+        #closeButton img {
+            cursor: pointer;
+            width: 40px;
+        }
+}
+
+
+    
+}
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .folders {
+      display: flex;
+      gap: 20px;
+    }
+
+    .folder {
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .content {
+      display: none;
+      text-align: center;
+    }
+
+    .image-gallery img {
+      margin: 5px;
+      cursor: pointer;
+    }
+
+    
+  </style>
 </head>
 <body>
-    <h1>¡Hola, mundo!</h1>
-    <p>Bienvenido a mi primera página en GitHub Pages.</p>
+<div class="container">
+    <!-- Carpetas -->
+    <div class="folders">
+    
+    
+        <div class="folder" onclick="openFolder('TheLastOne')">
+            <img src="https://64.media.tumblr.com/835f593c059aa7f141658db99f417d31/41dadce1542a2821-20/s75x75_c1/b691290c8e32db57436d6eee5a66fc827e3ebbac.pnj" alt="The Last One">
+            <span>The Last One</span>
+        </div>
+        
+        
+        <div class="folder" onclick="openFolder('FluffyRaces')">
+            <img src="https://64.media.tumblr.com/835f593c059aa7f141658db99f417d31/41dadce1542a2821-20/s75x75_c1/b691290c8e32db57436d6eee5a66fc827e3ebbac.pnj" alt="Fluffy Races">
+            <span>Fluffy Races</span>
+        </div>
+        
+        
+        <div class="folder" onclick="openFolder('FragmentedTruth')">
+            <img src="https://64.media.tumblr.com/835f593c059aa7f141658db99f417d31/41dadce1542a2821-20/s75x75_c1/b691290c8e32db57436d6eee5a66fc827e3ebbac.pnj" alt="Fragmented Truth">
+            <span>Fragmented Truth</span>
+        </div>
+        
+         <div class="folder" onclick="openFolder('About me')">
+            <img src="https://64.media.tumblr.com/e9b3dc174db267a6f4aea8e73f745fde/tumblr_inline_p7t1h0hoDT1qid2nw_100.gifv" alt="Fragmented Truth">
+            <span>About me</span>
+        </div>
+        
+        
+    </div>
+    
+    
+<style>
+
+
+  /* Aplica la fuente Jersey 10 Regular a todo el contenido dentro de #TheLastOne */
+
+  #TheLastOne p {
+  font-family: 'Jersey 10', serif;
+  font-weight: 10;
+  font-size: 80px; /* Tamaño de fuente para los párrafos */
+  line-height: 0.6; /* Espaciado entre líneas para una mejor legibilidad */
+  margin-bottom: 10px; /* Espacio inferior para separar los párrafos */
+}
+
+#TheLastOne h2 {
+  font-family: 'Jersey 10', serif;
+  font-weight: 60; /* Esto hace que el encabezado sea más delgado */
+  font-size: 25px; /* Tamaño de fuente para los encabezados */
+  line-height: 1; /* Espaciado entre líneas para encabezados */
+  margin-bottom: 20px; /* Espacio inferior para separar los encabezados */}
+  
+#TheLastOne h3 {
+  font-family: 'Jersey 10', serif;
+  font-weight: 20; /* Esto hace que el encabezado sea más delgado */
+  font-size: 30px; /* Tamaño de fuente para los encabezados */
+  line-height: 3; /* Espaciado entre líneas para encabezados */
+  margin-bottom: -6px; /* Espacio inferior para separar los encabezados */
+  text-align: center; /* Centra el texto */
+  
+  
+}
+
+.image-container {
+    background-color: rgba(255, 255, 255, 0.6);  /* Color de fondo claro con algo de transparencia */
+    padding: 0px;  /* Espacio alrededor de la imagen */
+    border-radius: 10px;  /* Bordes redondeados opcionales */
+    display: inline-block;  /* Asegura que las imágenes estén en línea */
+}
+
+  }
+  
+</style>
+</div>
+</head>
+    <!-- Contenido de las carpetas -->
+    <div id="TheLastOne" class="content">
+    
+     <!-- Botón Cerrar -->
+  <div class="closeButton" style="position: fixed; top: 20px; right: 20px; z-index: 10;">
+    <img src="https://64.media.tumblr.com/4dd1eef38e58a7b917da6a4382bc6350/41dadce1542a2821-26/s75x75_c1/b9cc95c1cb5559c97beffc6e61a26e6acab6c775.pnj" 
+         alt="Cerrar" 
+         onclick="closeFolder('TheLastOne')" 
+         style="cursor: pointer; width: 40px;">
+  </div>
+  
+  
+  <p>THE LAST ONE</p>
+  <h2>This is a 2D shooter game with top-down view and pixel art style, set in a Japanese school.</h2>
+   <!--  Al obtener las tres llaves, el jugador puede bajar a un bunker secreto y avanzar al siguiente nivel. -->
+  <h3>CHARACTERS</h3>
+  
+  <img src="https://64.media.tumblr.com/1fb17cde17673faa0fb6deca5cf84eea/8d17e98f4da598fd-33/s250x400/f7aae9da88c6bc4c6efa6751ac719b0ae040560b.gifv" 
+    style="image-rendering: pixelated; width: 480px; height: auto;">
+
+    <h3>BOSS</h3>
+    
+  <img src="https://64.media.tumblr.com/9d6a7b1d2fdb9eb8b42003d990785599/290adaacf5d7f9dc-d0/s75x75_c1/4bb4570c688a737edfd0982a2cd0a472b3bc7aca.gifv" 
+    style=" image-rendering: pixelated; width: 180PX; height: auto;">
+       
+  <img src="https://64.media.tumblr.com/582f72523c7eaa6b68d7e6f57f9e9ae6/290adaacf5d7f9dc-64/s75x75_c1/ab120d0661ad2685c1b5b856fb25059e9be60d9c.gifv" 
+       style="image-rendering: pixelated; width: 180px; height: 180px;">
+       
+  <img src="https://64.media.tumblr.com/5d03a02fa30f94c516203b57c1997d9a/290adaacf5d7f9dc-4a/s75x75_c1/41810b8c627c557a39dd27b256cf3173bab4fa3a.gifv" 
+       style="image-rendering: pixelated; width: 180px; height: 180px;">
+       
+  <img src="https://64.media.tumblr.com/5ff661bd9bb5643c7087783f84ff4eec/290adaacf5d7f9dc-5b/s75x75_c1/c0f27d50ac36d525763a36d62cb113d07f6cd956.gifv" 
+       style="image-rendering: pixelated; width: 180px; height: 180px;">
+
+
+<h2 style="text-align: center; margin-top: 20px;"> </h2>
+
+
+<img src="https://64.media.tumblr.com/1da0585fec32cbfcf7f9a44e9047859c/290adaacf5d7f9dc-ec/s75x75_c1/9a15ec26a30c1add8ea0bf9f0c3798fbd3336871.gifv" 
+       style="image-rendering: pixelated; width: 180px; height: 180px;">
+       
+  <img src="https://64.media.tumblr.com/d0d86d04546c6cd6f64c4fac95f9f75a/290adaacf5d7f9dc-69/s75x75_c1/8d417a4888c7ae59b3daeaa5f212baeda39bfd08.gifv" 
+       style="image-rendering: pixelated; width: 180px; height: 180px;">
+       
+  <img src="https://64.media.tumblr.com/9dd31c507bc6fd3fdf09f0f41378b3d6/290adaacf5d7f9dc-79/s75x75_c1/f5ee1349f5838908f9fdf437b61fb3ad76045631.gifv" 
+       style="image-rendering: pixelated; width: 180px; height: 180px;">
+       
+  <img src="https://64.media.tumblr.com/b98a587eccca8e00ab57b2d612e803a4/290adaacf5d7f9dc-62/s75x75_c1/a189618d9de92a3d89532e3a899cfcb0f91a3340.gifv" 
+       style="image-rendering: pixelated; width: 180px; height: 180px;">
+       
+<h2 style="text-align: center; margin-top: 20px;"> </h2>
+
+
+<!-- TERCERA PARTE -->
+<img src="https://64.media.tumblr.com/9c07a1abe1d7c549bcb18af67edba0f2/290adaacf5d7f9dc-ad/s75x75_c1/34bcb66f787d0b3c2bbf963637e6fb2ddf1c385a.gifv" 
+     style="image-rendering: pixelated; width: 180px; height: auto;">
+
+<img src="https://64.media.tumblr.com/b50c2a67b6ccc15a83620c457348e71c/290adaacf5d7f9dc-8d/s75x75_c1/7b226cc1003dffeac2f3a45d38b0e7ec7bd9a3bb.gifv" 
+     style="image-rendering: pixelated; width: 180px; height: auto;">
+     
+     <h2 style="text-align: center; margin-top: 20px;"> </h2>
+    
+
+        <!-- PARTE CAPSULADOS -->
+<h3 style="text-align: center; margin-top: 20px;"> SECONDARY CHARACTERS </h3> 
+
+       <img src="https://64.media.tumblr.com/d236d97b2ba9f2f91ee100ebc0f0b5dd/8d17e98f4da598fd-75/s75x75_c1/c162632403afe7ff09474ac9e4c8e87fb74fb02a.gifv" 
+     style="image-rendering: pixelated; width: 180px; height: auto;">
+
+<img src="https://64.media.tumblr.com/b54ed27efdf71054a805ac60dc9305d6/8d17e98f4da598fd-44/s75x75_c1/859718bb884661614706677892d3a693d163933f.gifv" 
+     style="image-rendering: pixelated; width: 180px; height: auto;">
+     
+     <img src="https://64.media.tumblr.com/f4500d0dbbc0ee67dd72514e65d18fe4/8d17e98f4da598fd-5b/s75x75_c1/0ab0232b751a62babfc7fbdfa3658b0c1dcf9196.gifv" 
+     style="image-rendering: pixelated; width: 180px; height: auto;">
+       
+ <h2 style="text-align: center; margin-top: 20px;"> </h2>
+
+     <img src="https://64.media.tumblr.com/b79a76843ac2c8ac3d8bafa788c60bd3/ee5085c6ff955b6d-fd/s75x75_c1/3ad5e5d764ce3a8f931886143f7df10cc8a0376c.gifv" 
+     style=" image-rendering: pixelated; width: 250PX; height: auto;">
+     
+     <img src="https://64.media.tumblr.com/a92e8c72f87c70929904f4a617087156/ee5085c6ff955b6d-07/s75x75_c1/00efc4d04a529c25d2eac2bdd0cd4ec2fcd8ebda.gifv" 
+     style="image-rendering: pixelated; width: 250PX; height: auto;">
+     
+      <h2 style="text-align: center; margin-top: 20px;"> </h2>
+      
+      <img src="https://64.media.tumblr.com/eff40aa9b05a41480d58522d3127c785/ee5085c6ff955b6d-00/s100x200/430818c52292f111bdbe19e46cad4d636613b889.pnj" 
+     style=" image-rendering: pixelated; width: 350PX; height: auto;">
+     
+
+        
+         <!-- PARTE DROPS -->
+         
+           <h3>DROPS</h3>
+           <div class="image-container">
+       <img src="https://64.media.tumblr.com/cba28ce48f32c26067d0cde03cbcb8f2/5b9ab5700a539156-b5/s75x75_c1/332af2e3e6c0624ef7cbdb73d11c20c8bfc387bb.gifv" 
+     alt="Sprite 3" 
+     style="image-rendering: pixelated; width: 140px; height: auto;">
+
+<img src="https://64.media.tumblr.com/582749ab296012f59a291840ed82c134/5b9ab5700a539156-2a/s75x75_c1/e9e39cedf1b93310d056c13d55b38ddf2b64bd0a.gifv" 
+     alt="Sprite 4" 
+     style="image-rendering: pixelated; width: 140px; height: auto;">
+     
+     <img src="https://64.media.tumblr.com/54ccd9504e892a75edb2e5d77c81efe7/5b9ab5700a539156-88/s75x75_c1/2e6e64983107b4e6adf15a2460f25c3def33786c.gifv" 
+     style="image-rendering: pixelated; width: 140px; height: auto;">
+     
+     <img src="https://64.media.tumblr.com/bad34735973c30bff35823d8bfccd43f/5b9ab5700a539156-1f/s75x75_c1/e0393e1dc8f4674b236d46f49edd3ab0676598c4.gifv" 
+     style="image-rendering: pixelated; width: 140px; height: auto;">
+         <h2 style="text-align: center; margin-top: 20px;"> </h2>  
+       
+       <img src="https://64.media.tumblr.com/d3762db58b0b11ec3ef468613a1df66e/5b9ab5700a539156-ce/s75x75_c1/bdca1ae34511d37d1de52673b008cfc935ba9fb8.gifv" 
+     style="image-rendering: pixelated; width: 140px; height: auto;">
+     
+     <img src="https://64.media.tumblr.com/89f14443c976438bd761a405c1f75340/5b9ab5700a539156-1d/s75x75_c1/34188b21215b8daa70f8d62acd0f3ac4800897d6.gifv" 
+     style="image-rendering: pixelated; width: 140px; height: auto;">
+     
+     <img src="https://64.media.tumblr.com/9252892dcd46723faafe1344507b3083/5b9ab5700a539156-95/s75x75_c1/c90dbeb79775d15891aa2275ce61dfe1e96c148e.gifv" 
+     style="image-rendering: pixelated; width: 140px; height: auto;">
+     
+              <h2 style="text-align: center; margin-top: 20px;"> </h2>  
+     
+     <img src="https://64.media.tumblr.com/8ccf9a9b87338666900657b5c94253d4/5b9ab5700a539156-98/s75x75_c1/d877ee83fdc461b4869bed1b9686b1cc324c05c6.gifv" 
+     style="image-rendering: pixelated; width: 140px; height: auto;">
+       
+       <img src="https://64.media.tumblr.com/79941a5f2ca608df411d7f52fe69a318/5b9ab5700a539156-00/s75x75_c1/7494171c0206ddddad4e2e723c9c296078ac49ab.gifv" 
+     style="image-rendering: pixelated; width: 140px; height: auto;">
+     
+     <img src="https://64.media.tumblr.com/db92c522c44cc75009c00484fd6021fd/5b9ab5700a539156-d1/s75x75_c1/88d307f1d131cd4084f1e84f64514082ce1658db.gifv" 
+     style="image-rendering: pixelated; width: 140px; height: auto;">
+     
+     <img src="https://64.media.tumblr.com/ff2bebb26b55f38d9037df743585522d/5b9ab5700a539156-2b/s75x75_c1/a96135710dbf611d80857c27bf3d29115432bae1.gifv" 
+     style="image-rendering: pixelated; width: 140px; height: auto;">
+     </div>  
+        <!-- PARTE HUD -->
+        
+          <h2 style="text-align: center; margin-top: 20px;"> </h2>  
+          <h3>HUD</h3>
+     
+<img src="https://64.media.tumblr.com/2288daf29ffd70db7beb69b7e73df0e6/46ee5a0e376075f0-19/s75x75_c1/6d96a464bb9a03c4ece65582d5960c2ec6267c68.gifv" 
+     style="image-rendering: pixelated; width: 160px; height: auto;">
+
+<img src="https://64.media.tumblr.com/b6e80f8b0a9846377d079f24f3c9b32f/46ee5a0e376075f0-41/s75x75_c1/fd2e8b9d3f8c8ea1face71425c5277772955ec9e.gifv" 
+     style="image-rendering: pixelated; width: 160px; height: auto;">
+     
+<img src="https://64.media.tumblr.com/7c88925675fae3642977ddc94a2dadeb/46ee5a0e376075f0-64/s75x75_c1/3f32c3d7c5b623c7eaf9dff035fc1f42819ed7ff.pnj" 
+     style="image-rendering: pixelated; width: 160px; height: auto;">
+
+<img src="https://64.media.tumblr.com/8204610efd557d246e422b8ea29f2176/46ee5a0e376075f0-4a/s75x75_c1/1415781d8e121268f7c11c10a1778889151eecdc.pnj" 
+     style="image-rendering: pixelated; width: 160px; height: auto;">
+     
+     <h2 style="text-align: center; margin-top: 20px;"> </h2> 
+     
+<img src="https://64.media.tumblr.com/6e0010dc2fc74b13a72e5a5f8cd650e9/46ee5a0e376075f0-3f/s100x200/c2621f109520f9f6f126f0c3120fabbe0df08d39.gifv" 
+     style="image-rendering: pixelated; width: 450px; height: auto;">
+     
+     <h2 style="text-align: center; margin-top: 20px;">By obtaining the three keys, the player can go down to a secret bunker and advance to the next level.</h2> 
+      <!--  Al obtener las tres llaves, el jugador puede bajar a un bunker secreto y avanzar al siguiente nivel. -->
+      
+      
+      
+     <div class="image-container">
+<img src="https://64.media.tumblr.com/490230d66ed1904c39d06d7187d7ea66/a59ac6aa7911edba-9f/s75x75_c1/ae830e754da0edf0cf309ef998bcf30bc780b07d.gifv" 
+     style="image-rendering: pixelated; width: 250px; height: auto;">
+          </div >
+          
+          
+     <h3 style="text-align: center; margin-top: 20px;"> MENU </h3> 
+
+     <img src="https://64.media.tumblr.com/ac3f261a416200968347a7460a815311/a59ac6aa7911edba-4c/s540x810/472de111782ac64d8c87c568944bdb6edc2a6d7f.gifv" 
+     style=" width: 850px; height: auto;">
+     
+      <h3 style="text-align: center; margin-top: 20px;"> CAFETERIA </h3> 
+     
+     <img src="https://64.media.tumblr.com/9f8ff0e280c30236e5bec5090cb21ee0/46ff9d3cd7e111cf-eb/s100x200/10178af6924f5e60fb91a72beb21e9cf4b58b13d.pnj" 
+     style=" image-rendering: pixelated; width: 400PX; height: auto;">
+     
+     <img src="https://64.media.tumblr.com/40f7d465a9d6d6af211ffa8ad7820160/46ff9d3cd7e111cf-31/s100x200/02b18ae87b1633e5b7b8d2e78bff0904bd46a13f.pnj" 
+     style="image-rendering: pixelated; width: 400PX; height: auto;">
+
+         <h2 style="text-align: center; margin-top: 20px;"> </h2>
+     
+     <img src="https://64.media.tumblr.com/3e51bbe9ec4f27e13d5e39a4ef8eb579/46ff9d3cd7e111cf-ca/s100x200/1215dcdf599065bff4e1a2bd84fd0f689c1990c6.pnj" 
+     style=" image-rendering: pixelated; width: 360PX; height: auto;">
+     
+        <h2 style="text-align: center; margin-top: 20px;"> </h2>
+        
+   <img src="https://64.media.tumblr.com/17407fe2830efd13507eb66fe0fdf714/46ff9d3cd7e111cf-53/s540x810/c9acee6ec68494914676ea5fa2dddb29038dae53.pnj" 
+     style="image-rendering: pixelated; width: 700PX; height: auto;">
+     
+     <h2 style="text-align: center; margin-top: 20px;"> Of everything I’ve shown, I was responsible for designing and animating the game's villain, as well as animating the secondary characters. I didn’t draw the main character, but I adjusted their colors to match the game's style. I also handled all the animations you see, including their implementation in Unity. Additionally, I worked on various programming aspects, although that’s another topic.</h2> 
+ <!-- De todo lo que he mostrado, me encargué de diseñar a la villana del juego y animarla, así como de animar a los personajes secundarios. No dibujé al personaje principal, pero ajusté sus colores para que coincidieran con el estilo del juego. También fui responsable de toda la animación que se puede ver, incluyendo su implementación en Unity. Además, trabajé en varios aspectos de la programación, aunque ese es otro tema.-->
+
+     
+ <!--  FLUFFY RACESSSS -->
+   
+</div>
+
+  <div id="FluffyRaces" class="content">
+<!-- Botón Cerrar -->
+  <div class="closeButton" style="position: fixed; top: 20px; right: 20px; z-index: 10;">
+    <img src="https://64.media.tumblr.com/4dd1eef38e58a7b917da6a4382bc6350/41dadce1542a2821-26/s75x75_c1/b9cc95c1cb5559c97beffc6e61a26e6acab6c775.pnj" 
+         alt="Cerrar" 
+         onclick="closeFolder('FluffyRaces')" 
+         style="cursor: pointer; width: 40px;">
+  </div>
+         
+      <h2>Fluffy Races</h2>
+      <p>This is a time-trial racing game with a very cute kitten theme, but with bloody deaths, creating a unique mix of cuteness and violence.</p>
+      
+      
+      <h3 style="text-align: center; margin-top: 20px;"> CHARACTERS 2D </h3> 
+      <div class="image-container">
+      
+<img src="https://64.media.tumblr.com/39cc59c5f227f3264d40f852f8d59fb1/8d9dd96f161287fe-83/s400x600/c9e4262e75dcd0835954045bfbdef0a618689604.pnj" 
+     style="image-rendering: pixelated; width: 140px; height: auto;">
+     
+<img src="https://64.media.tumblr.com/c70a8374efe9793a9eae2e615509818f/8d9dd96f161287fe-48/s400x600/f2d3057373261d51f005d67b654e65616bb3b91c.pnj" 
+     style="image-rendering: pixelated; width: 140px; height: auto;">
+     
+<img src="https://64.media.tumblr.com/d3d01ada692eed2c11eba5b27f75b484/8d9dd96f161287fe-9d/s540x810/06c56466418bffc1f920afdba1be1c04c9fc3216.pnj" 
+     style="image-rendering: pixelated; width: 140px; height: auto;">
+     
+<img src="https://64.media.tumblr.com/0b2ba78f14042a1078828b43915f19b9/8d9dd96f161287fe-4a/s400x600/f02a8fe48d11e4ce6d453a0f4d1545d86fd04e66.pnj" 
+     style="image-rendering: pixelated; width: 140px; height: auto;">
+     
+<img src="https://64.media.tumblr.com/33e7eab8de51e0ec8dc78f1b86b36759/8d9dd96f161287fe-b5/s400x600/15c0df30aa38a61e7134c29d7a99a6b69f64247c.pnj" 
+     style="image-rendering: pixelated; width: 140px; height: auto;">
+
+          </div >
+          
+          
+       <h3 style="text-align: center; margin-top: 20px;"> CHOOSE YOUR CAT </h3>    
+<p>On this screen, players can select their character. 
+Upon choosing one, a detailed description of their abilities is displayed.</p>
+           
+          <img src="https://64.media.tumblr.com/70804bbf570e5f9eb11d3cd4036a58d0/457a6f11961d3658-a4/s1280x1920/763991e82306f3a64932fb0d2c227b6438ec4527.gifv" 
+     style="image-rendering: pixelated; width: 860px; height: auto;">
+          
+          <h3 style="text-align: center; margin-top: 20px;"> CHOOSE YOUR CAR </h3>    
+         <p>This is how the car selection screen looks. It doesn't provide any abilities. It was simply for the player's preference, offering cars in different colors.</p>
+          
+           <!-- CHOOSE YOUR CAR -->
+          
+     <!-- Contenedor centrado -->
+<div style="display: flex; justify-content: center; align-items: center; height: auto;">
+  <!-- Contenedor con la imagen de fondo -->
+  <div style="position: relative; width: 860px; height: auto; margin: auto;">
+    <!-- Imagen de fondo -->
+    <img src="https://64.media.tumblr.com/2c527a0695ea7db433dcc9652294fd08/7e48b0d5c71eb2e0-bc/s2048x3072/fce982ed61c4c576e835de7d955375bb9ec85803.pnj" 
+         alt="Fondo" 
+         style="width: 100%; height: auto; display: block;">
+    
+    <!-- Contenedor para las imágenes encima -->
+    <div style="position: absolute; top: 90px; left: 20px; display: flex; flex-wrap: wrap; gap: 20px;">
+      <!-- Imagen 1 -->
+      <img class="hoverImage"
+           src="https://64.media.tumblr.com/e58a4dae9b3e12135cc127e72edc6b3b/7e48b0d5c71eb2e0-10/s1280x1920/ed23662580792fb00049b8038201b077eafe0f94.pnj" 
+           data-hover="https://64.media.tumblr.com/88c47ca003c9a58995bf96869a8409ee/7e48b0d5c71eb2e0-f1/s540x810/ab94b7f1f1c622fccd43ad490e459030020b535f.pnj"
+           alt="Encima1" 
+           style="width: 260px; height: auto; transition: transform 0.3s;">
+      
+      <!-- Imagen 2 -->
+      <img class="hoverImage"
+           src="https://64.media.tumblr.com/00b45a18d7a461b956e13c92c4e4ce33/7e48b0d5c71eb2e0-eb/s1280x1920/f89067ded24b80682f99cc66bf86bbf5870f03bc.pnj" 
+           data-hover="https://64.media.tumblr.com/0ff1e47d8092ef5db81312dcd5bf76d7/7e48b0d5c71eb2e0-7d/s400x600/fe240ba1f0c2dff92da44ff76bc5adebca4d1160.pnj"
+           alt="Encima2" 
+           style="width: 260px; height: auto; transition: transform 0.3s;">
+      
+      <!-- Imagen 3 -->
+      <img class="hoverImage"
+           src="https://64.media.tumblr.com/ad47fa32812a1fb4c89dbe9b56e23926/7e48b0d5c71eb2e0-fa/s1280x1920/541d939e925ef462b11a47ae617bc1ddde79a25b.pnj" 
+           data-hover="https://64.media.tumblr.com/4029a648eeab0ad2ecdf1a296d265c81/7e48b0d5c71eb2e0-4a/s400x600/c86824b82172ac107598aee41f59a7b2a0351892.pnj"
+           alt="Encima3" 
+           style="width: 260px; height: auto; transition: transform 0.3s;">
+       
+     <!-- Imagen 4 -->
+<img class="hoverImage"
+     src="https://64.media.tumblr.com/79590b490066329cd16c2ee7d8ca0c82/7e48b0d5c71eb2e0-71/s1280x1920/23ea2958aeb2d33916fccbc563feeb4c7aea0680.pnj" 
+     data-hover="https://64.media.tumblr.com/f998cbc410ce30b85c167f64ba2ea1e0/7e48b0d5c71eb2e0-b3/s400x600/3baa9b03ef581209ea3a75f3db396caee4c50614.pnj"
+     alt="Encima4" 
+     style="width: 260px; height: auto; margin-left: 80px; transition: transform 0.3s;">
+
+<!-- Imagen 5 -->
+<img class="hoverImage"
+     src="https://64.media.tumblr.com/54da3c1467f197f5ef849af37b9f61f5/7e48b0d5c71eb2e0-9d/s1280x1920/be0f5229aea5faff20027eb6e0bff4832d5c9175.pnj" 
+     data-hover="https://64.media.tumblr.com/5908c8e3054ca531ca367e316e4b0b06/7e48b0d5c71eb2e0-a0/s400x600/cb525ff6e8437b8a01acd338d3d8685c152cbdb5.pnj"
+     alt="Encima5" 
+     style="width: 260px; height: auto; margin-left:60px; transition: transform 0.3s;">
+
+ </div>
+
+ <h3 style="text-align: center; margin-top: 20px;"> CHARACTERS </h3>    
+   <p>These 3D models are divided into several parts due to the specific requirements of the project.</p>
+   
+ 
+ <img src="https://64.media.tumblr.com/f57ca3d6a7aab26d530196a10abed2a2/ca632b62bab4a4ad-3d/s1280x1920/e7b37cd2d0cc19718518e56936a219dfb2805f67.pnj" 
+     style="image-rendering: pixelated; width: 660px; height: auto;">
+     
+     <h3 style="text-align: center; margin-top: 20px;"> OBJECTS </h3>    
+   <p>3D objects were used to decorate the entire map.</p>
+   
+ <img src="https://64.media.tumblr.com/3b6bdd65e4b58a7d5ce73d0e7b9c8887/ca632b62bab4a4ad-27/s250x400/1b363367f837049e2873d4dc0e5e790ea8962d56.pnj" 
+     style="image-rendering: pixelated; width: 150px; height: auto;">
+
+<img src="https://64.media.tumblr.com/943dc6f215dcb99d6c4856ac9a77bc66/ca632b62bab4a4ad-16/s250x400/2042f453205e95f186557057d0c431cc0e60f70f.pnj" 
+     style="image-rendering: pixelated; width: 150px; height: auto;">
+     
+<img src="https://64.media.tumblr.com/940eafdcf3927b3e8a54d3f5da0ad2fe/ca632b62bab4a4ad-75/s250x400/5f5c0b27aace32f2b4d86d9231747ff7790cab8a.pnj" 
+     style="image-rendering: pixelated; width: 150px; height: auto;">
+
+<img src="https://64.media.tumblr.com/d5ba54eb935567df6139e8b07dced357/ca632b62bab4a4ad-fc/s250x400/b12f5bf3559ed8c4dacb15ebfa34bf13ae3b76f2.pnj" 
+     style="image-rendering: pixelated; width: 150px; height: auto;">
+     
+<img src="https://64.media.tumblr.com/b1e44bf3fe56994245c6a959560d79a6/ca632b62bab4a4ad-ac/s250x400/9d7e4f44caa90e4861dd80e4d76d3e9e1c078cb3.pnj" 
+     style="image-rendering: pixelated; width: 150px; height: auto;">     
+     
+ <img src="https://64.media.tumblr.com/55067712643f0ca09e43ce00d157a984/ca632b62bab4a4ad-9f/s250x400/cf056bfaa3421ed601c28da7f181806f16c855d9.pnj" 
+     style="image-rendering: pixelated; width: 150px; height: auto;">
+     
+<img src="https://64.media.tumblr.com/b38b784fb780a9c931dff929f7d38185/ca632b62bab4a4ad-18/s250x400/c89c6e81eb4a67847927396ac6164ae8aa60337e.pnj" 
+     style="image-rendering: pixelated; width: 150px; height: auto;">      
+     
+<img src="https://64.media.tumblr.com/ca6b85afd831236f70f9a0e61d5687ef/ca632b62bab4a4ad-a7/s250x400/f8a70c2d1ffb026ba0a7fbfcc8268bcbb36972f6.pnj" 
+     style="image-rendering: pixelated; width: 150px; height: auto;">     
+     
+<img src="https://64.media.tumblr.com/e09548611e018af6b1b096772a25168e/ca632b62bab4a4ad-bb/s250x400/f2df96bd6cb03c583eb407ed09e3df37865452ff.pnj" 
+     style="image-rendering: pixelated; width: 150px; height: auto;">
+     
+<img src="https://64.media.tumblr.com/1820bc2e2d84ec4fbc1f2357c1e6e4c9/ca632b62bab4a4ad-4a/s250x400/fe79ef17d18679072978998a2e40aba9a79091d4.pnj" 
+     style="image-rendering: pixelated; width: 150px; height: auto;"> 
+     
+<img src="https://64.media.tumblr.com/5207a5044fbc7c67ded7c87368dd04d6/ca632b62bab4a4ad-3d/s250x400/3a728bbc2b5613f582dc1cfd7e8a07c4a146b0bc.pnj" 
+     style="image-rendering: pixelated; width: 150px; height: auto;">
+     
+<img src="https://64.media.tumblr.com/66fd28a860f0257d396626bbb822fbb3/ca632b62bab4a4ad-ff/s400x600/0ff8d362417501541dcfd711ec781dd4b79fd25f.pnj" 
+     style="image-rendering: pixelated; width: 150px; height: auto;"> 
+     
+<img src="https://64.media.tumblr.com/5de1fc7b6d5a1663dafda4972e48ee56/ca632b62bab4a4ad-b0/s250x400/c0c2c00cca1695cfca90160fd7692a8578750554.pnj" 
+     style="image-rendering: pixelated; width: 150px; height: auto;">     
+     
+     
+     
+     
+     
+     
+      <h3 style="text-align: center; margin-top: 20px;"> VFX </h3> 
+              
+ <h2 style="text-align: center; margin-top: 20px;"> </h2>
+          <p>I created these visual effects (VFX) for the items in the air. I made the animations, 3D models, materials, and the effect when picking them up.</p>
+
+<img src="https://64.media.tumblr.com/bc54939c4d80e04eec789e7987157de3/457a6f11961d3658-d9/s400x600/77313f5dc0f92e48b6e95b9e887fec9e0326b5d7.gifv" 
+     style="image-rendering: pixelated; width: 560px; height: auto;">
+     
+<img src="https://64.media.tumblr.com/38be670fe96a2433e96942b16ce49c45/2f4da677bdea8e2a-92/s1280x1920/65a6061b315c21a9083a1965dd94bbd4083b0e6e.gifv" 
+     style="image-rendering: pixelated; width: 560px; height: auto;">
+     
+              <p>This effect is very nice, surrounding the car and featuring shines that make it stand out.</p>
+              
+
+<img src="https://64.media.tumblr.com/df5a0ccdae02d27b4c4f1434d0108c86/457a6f11961d3658-02/s1280x1920/58c3600a4c2006ec73e82397c4cdad9d4cabd09b.gifv"
+     style="image-rendering: pixelated; width: 660px; height: auto;">
+     
+     <img src="https://64.media.tumblr.com/7626054bf67490cf3c190a732116b086/2f4da677bdea8e2a-0e/s1280x1920/7a1c9e61279d8e75b03590621595afe7b0b33fdf.gifv"
+     style="image-rendering: pixelated; width: 660px; height: auto;">
+     
+     
+
+         <p>This effect occurs when reaching high speed, maintaining a cute pink color to keep the theme intact.</p>
+         
+<img src="https://64.media.tumblr.com/ec25f0b555ed71f198d85ca261736c75/2f4da677bdea8e2a-83/s1280x1920/463507ec5f77f01ecdf30d3149f21879b0264b6b.gifv"
+     style="image-rendering: pixelated; width: 660px; height: auto;">      
+     
+<p>In this game, I worked on the 2D, 3D art, and VFX. I didn’t do animations because it was prohibited for this project. It was my first time working with 3D and textures, and I really enjoyed the process.</p>
+
+<img src="https://64.media.tumblr.com/4fbec75c2bdd9dc8cd20d7eda01fdb79/457a6f11961d3658-d9/s1280x1920/c12df35608d952919523648c70ec5ddad8b0baa0.gifv" style="image-rendering: pixelated; width: 660px; height: auto;">
+
+<p>  ♥ </p>
+   
+  </div>
+</div>
+
+<script>
+  // Función para manejar el cambio de imagen al pasar el cursor
+  function setupImageHoverEffect(image) {
+    const defaultSrc = image.getAttribute('src');
+    const hoverSrc = image.getAttribute('data-hover');
+    
+    image.addEventListener('mouseenter', () => {
+      image.src = hoverSrc;
+    });
+    image.addEventListener('mouseleave', () => {
+      image.src = defaultSrc;  // Vuelve a la imagen original
+    });
+  }
+
+  // Obtener todas las imágenes con la clase "hoverImage"
+  const images = document.querySelectorAll('.hoverImage');
+  images.forEach(setupImageHoverEffect);
+</script>
+
+     
+     
+    </div>
+    
+    
+<!-- FRAGMENTED TRUTH -->
+<div id="FragmentedTruth" class="content">
+
+  <!-- Botón Cerrar -->
+  <div class="closeButton" style="position: fixed; top: 20px; right: 20px; z-index: 10;">
+    <img src="https://64.media.tumblr.com/4dd1eef38e58a7b917da6a4382bc6350/41dadce1542a2821-26/s75x75_c1/b9cc95c1cb5559c97beffc6e61a26e6acab6c775.pnj" 
+         alt="Cerrar" 
+         onclick="closeFolder('FragmentedTruth')" 
+         style="cursor: pointer; width: 40px;">
+  </div>
+
+  <h2>Fragmented Truth</h2>
+  <p>An investigation game set in the 1980s, featuring a low-poly visual style inspired by the PS1 era graphics.</p>
+
+  <!-- Imágenes -->
+  <img src="https://64.media.tumblr.com/738a675ac17f917a7ffd62569c845a18/0c3c10dd95727ccc-95/s2048x3072/2dac03d4220b6f4b2ef4d5139b9c3564eed0f260.jpg" 
+       style="image-rendering: pixelated; width: 890px; height: auto; display: block; margin: 10px auto;">
+  <img src="https://64.media.tumblr.com/b59879a945ddeee07f83c3e375b5febc/0c3c10dd95727ccc-2e/s2048x3072/aaaec072d7e9933793714a8056372bef63c74798.jpg" 
+       style="image-rendering: pixelated; width: 890px; height: auto; display: block; margin: 10px auto;">
+  <img src="https://64.media.tumblr.com/3ddd07bd542d52ef6c3afd2f4e163912/0c3c10dd95727ccc-e2/s2048x3072/32699c486216421ca2f00d590fee040673fbf246.jpg" 
+       style="image-rendering: pixelated; width: 890px; height: auto; display: block; margin: 10px auto;">
+  <img src="https://64.media.tumblr.com/7c085cbf96223d8ea700d10598fa2336/0c3c10dd95727ccc-84/s2048x3072/1e545bb99d7fa1de883c4ef84313e05863ddd573.jpg" 
+       style="image-rendering: pixelated; width: 890px; height: auto; display: block; margin: 10px auto;">
+  <img src="https://64.media.tumblr.com/a298754e738a136fb7e04101a0bd11a7/0c3c10dd95727ccc-de/s2048x3072/45e87edcf90ca6fb9326d1fed68556ef5b1e0c45.jpg" 
+       style="image-rendering: pixelated; width: 890px; height: auto; display: block; margin: 10px auto;">
+  <img src="https://64.media.tumblr.com/f09b7c028ab7d8d294f6294f852fbaae/0c3c10dd95727ccc-d4/s2048x3072/366dc47293b157447085b95ec26156505cafd728.jpg" 
+       style="image-rendering: pixelated; width: 890px; height: auto; display: block; margin: 10px auto;">
+  <img src="https://64.media.tumblr.com/1818338b2fb3649c2bcf69498aa2e394/0c3c10dd95727ccc-ef/s2048x3072/4d078ace734143d55577b7a4ba460113d2270264.jpg" 
+       style="image-rendering: pixelated; width: 890px; height: auto; display: block; margin: 10px auto;">
+
+  <p>A game in progress...</p>
+</div>
+
+
+  <!-- FRAGMENTED TRUTH -->
+<div id="About me" class="content">
+
+  <!-- Botón Cerrar -->
+  <div class="closeButton" style="position: fixed; top: 20px; right: 20px; z-index: 10;">
+    <img src="https://64.media.tumblr.com/4dd1eef38e58a7b917da6a4382bc6350/41dadce1542a2821-26/s75x75_c1/b9cc95c1cb5559c97beffc6e61a26e6acab6c775.pnj" 
+         alt="Cerrar" 
+         onclick="closeFolder('About me')" 
+         style="cursor: pointer; width: 40px;">
+  </div>
+
+  <h2>Faaaaa</h2>
+  <p>dasd.</p>
+
+  <!-- Imágenes -->
+  <img src="https://64.media.tumblr.com/738a675ac17f917a7ffd62569c845a18/0c3c10dd95727ccc-95/s2048x3072/2dac03d4220b6f4b2ef4d5139b9c3564eed0f260.jpg" 
+       style="image-rendering: pixelated; width: 890px; height: auto; display: block; margin: 10px auto;">
+
+
+  <p>A game in progress...</p>
+</div>
+
+  <script>
+   // Abrir la carpeta específica
+function openFolder(folderId) {
+    const folder = document.getElementById(folderId);
+    
+    // Ocultar todas las carpetas abiertas
+    const allFolders = document.querySelectorAll('.content');
+    allFolders.forEach(f => f.style.display = 'none');
+    
+    // Mostrar la carpeta seleccionada
+    folder.style.display = 'block';
+}
+
+// Cerrar carpeta específica
+function closeFolder(folderId) {
+    const folder = document.getElementById(folderId);
+    folder.style.display = 'none';
+}
+
+</script>
+
 </body>
 </html>
